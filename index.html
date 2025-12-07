@@ -11,7 +11,7 @@ t.src=v;s=b.getElementsByTagName(e)[0];
 s.parentNode.insertBefore(t,s)}(window, document,'script',
 'https://connect.facebook.net/en_US/fbevents.js');
 fbq('init', '854579477153257');
-fbq('track', 'PageView'); // The PageView event is correctly placed here
+fbq('track', 'PageView'); // PageView event on load
 </script>
 <noscript><img height="1" width="1" style="display:none"
 src="https://www.facebook.com/tr?id=854579477153257&ev=PageView&noscript=1"
@@ -86,10 +86,10 @@ src="https://www.facebook.com/tr?id=854579477153257&ev=PageView&noscript=1"
             cursor: pointer;
         }
         
-        /* New Style for the Subscribe Button to differentiate */
+        /* Style for the main action button */
         .subscribe-btn {
             margin-top: 2rem;
-            background-color: #ff4500; /* Distinct color for Subscribe */
+            background-color: #ff4500; /* Distinct color */
         }
 
 
@@ -147,14 +147,8 @@ src="https://www.facebook.com/tr?id=854579477153257&ev=PageView&noscript=1"
         </p>
         
         <div class="bounce">
-            <button class="mb-5" onclick="redirectToLink()">
-                <i class="fa fa-telegram"></i> JOIN NOW FOR FREE
-            </button>
-        </div>
-        
-        <div>
             <button class="subscribe-btn" onclick="fireSubscribePixel()">
-                 SUBSCRIBE NOW (Free)
+                <i class="fa fa-telegram"></i> SUBSCRIBE NOW (Free)
             </button>
         </div>
     </main>
@@ -193,23 +187,25 @@ src="https://www.facebook.com/tr?id=854579477153257&ev=PageView&noscript=1"
             }, 1000);
         }
 
+        // The redirectToLink function is no longer called by a button, 
+        // but it is kept here for reference if needed.
         function redirectToLink() {
-            // Your original Telegram link
             window.location.href = "https://t.me/+V2Y4LTJCj280ZWE9"; 
         }
 
-        // NEW FUNCTION to fire the Subscribe pixel event
+        // FUNCTION to fire the Subscribe pixel event
         function fireSubscribePixel() {
             if (typeof fbq === 'function') {
+                // Fire the 'Subscribe' event
                 fbq('track', 'Subscribe', {
                     value: 0.00,
-                    currency: 'INR' // or your desired currency
+                    currency: 'INR'
                 });
-                console.log('Facebook Pixel: Subscribe event fired with value 0.00');
+                console.log('Facebook Pixel: Subscribe event fired.');
             } else {
                 console.error('Facebook Pixel not loaded.');
             }
-            // Optionally redirect the user after the pixel fires
+            // Redirect the user to Telegram after the pixel fires
              window.location.href = "https://t.me/+V2Y4LTJCj280ZWE9"; 
         }
 
